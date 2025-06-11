@@ -39,6 +39,36 @@ const teamMembers = [
 
 //Seleziono gli elementi di cui ho bisogno
 const rowEl = document.querySelector(".row");
+const nameEl = document.getElementById("nome");
+const lastNameEl = document.getElementById("cognome");
+const imgEl = document.getElementById("url");
+const emailEl = document.getElementById("email");
+const formEl = document.getElementsByTagName("form");
+
+//aggiungo l'event listener sul form in attesa del submit
+formEl.addEventListener("submit", (e) => {
+ 
+  //prevengo la perdita dei dati una volta che l'utente invia i dati cliccando submit
+  e.preventDefault()
+
+  //prendo i dati inseriti dall'utente e me li salvo in una variabile
+  const nome = nameEl.value;
+  const cognome = lastNameEl.value; 
+  const email = emailEl.value; 
+  const imgUrl = imgEl.value;
+
+  //creo un nuovo elemento formato da 4 oggetti che sono le informazioni di ogni membro del team
+  const newMember = {
+    nome,
+    cognome, 
+    email,
+    imgUrl
+  }
+
+  //inserisco il nuovo membro all'interno dell'array di partenza, e procedo con l'inserire i membri in pagina
+  teamMembers.push(newMember);
+
+})
 
 //invoco la funzione che prende come parametri in ingresso il mio array e il nodo html a cui aggiungere il markup
 renderMembers(teamMembers, rowEl);

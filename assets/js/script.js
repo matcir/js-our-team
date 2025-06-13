@@ -38,12 +38,12 @@ const teamMembers = [
 ];
 
 //Seleziono gli elementi di cui ho bisogno
-const rowEl = document.querySelector(".row");
+const rowEl = document.querySelector(".card-row");
 const nameEl = document.getElementById("nome");
-const lastNameEl = document.getElementById("cognome");
+const roleEl = document.getElementById("ruolo");
 const imgEl = document.getElementById("url");
 const emailEl = document.getElementById("email");
-const formEl = document.getElementsByTagName("form");
+const formEl = document.querySelector(".form");
 
 //aggiungo l'event listener sul form in attesa del submit
 formEl.addEventListener("submit", (e) => {
@@ -52,22 +52,23 @@ formEl.addEventListener("submit", (e) => {
   e.preventDefault()
 
   //prendo i dati inseriti dall'utente e me li salvo in una variabile
-  const nome = nameEl.value;
-  const cognome = lastNameEl.value; 
+  const name = nameEl.value;
+  const role = roleEl.value; 
   const email = emailEl.value; 
-  const imgUrl = imgEl.value;
+  const img = imgEl.value; 
 
   //creo un nuovo elemento formato da 4 oggetti che sono le informazioni di ogni membro del team
   const newMember = {
-    nome,
-    cognome, 
+    name,
+    role, 
     email,
-    imgUrl
+    img
   }
 
   //inserisco il nuovo membro all'interno dell'array di partenza, e procedo con l'inserire i membri in pagina
-  teamMembers.push(newMember);
+  // teamMembers.push(newMember);
 
+  renderMembers([newMember], rowEl);
 })
 
 //invoco la funzione che prende come parametri in ingresso il mio array e il nodo html a cui aggiungere il markup
@@ -79,6 +80,7 @@ function renderMembers(teamMembers, htmlNode) {
   //inizializzo la stringa che conterrà il linguaggio di markup da aggiungere dei singoli membri
   htmlNode.innerHTMl = "";
   
+
   //inizio a ciclare nell'array fornito
   for(let i=0; i < teamMembers.length; i++) {
     
@@ -102,9 +104,11 @@ function membersMarkup(member) {
   //scrivo il markup come se fossi nel file index, sfruttando l'interpolazione e accedendo alle informazioni tramite la relativa notazione ${value}
   const markup = `<div class="col">
                     <div class="card">
-                      <img src= ./${img} class="card-img-top" alt="member.png">
-                      <div class="card-body">
-                        <h3 id="name">${name}</h3>
+                      
+                    <img src= ./assets/${img} class=" card-img-top " alt="member.png">
+                    
+                    <div class="card-body">
+                        <h3 id="nome">${name}</h3>
                         <div>${role}</div>
                         <div>${email}</div>
                       </div>
